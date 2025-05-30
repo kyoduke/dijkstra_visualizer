@@ -15,7 +15,7 @@ This documentation provides an overview of the Dijkstra's Algorithm Visualizer a
 2. Use left-click to place:
    - First click: Start point (orange)
    - Second click: End point (turquoise)
-   - Subsequent clicks: Barriers/walls (black)
+   - Subsequent clicks or dragging: Barriers/walls (black)
 3. Use right-click to remove any placed node
 4. Click the "Start Algorithm" button or press the Spacebar to start the visualization
 5. Click "Clear Path" to clear the path but keep barriers and start/end points

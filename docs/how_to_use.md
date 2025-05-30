@@ -24,7 +24,7 @@ The interface consists of:
 - **Left-click**:
   - First click: Place the start point (orange)
   - Second click: Place the end point (turquoise)
-  - Subsequent clicks: Place barriers/walls (black)
+  - Subsequent clicks or dragging: Place barriers/walls (black)
 - **Right-click**:
   - Remove any placed node (start, end, or barrier)
 
@@ -44,7 +44,7 @@ The interface consists of:
 1. **Setup Phase**:
    - Left-click anywhere in the grid to place the start point (orange)
    - Left-click elsewhere to place the end point (turquoise)
-   - Add barriers (black) by left-clicking in any remaining cells
+   3. Add barriers (black) by left-clicking or dragging your mouse across any remaining cells
    - Right-click to remove any placed element if you want to make changes
 
 2. **Visualization Phase**:
@@ -62,7 +62,7 @@ The interface consists of:
 
 ## Tips for Effective Use
 
-- Create different barrier patterns to test the algorithm's behavior
+- Create different barrier patterns by dragging the mouse to test the algorithm's behavior
 - Try placing the start and end points at different distances
 - Notice how the algorithm always finds the shortest path
 - Observe how the exploration spreads out equally in all directions
