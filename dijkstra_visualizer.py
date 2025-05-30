@@ -3,10 +3,13 @@
 import pygame
 import math
 from queue import PriorityQueue
+import sys
 
 WIDTH = 600
-WIN = pygame.display.set_mode((WIDTH, WIDTH))
+BUTTON_HEIGHT = 40
+WIN = pygame.display.set_mode((WIDTH, WIDTH + BUTTON_HEIGHT))
 pygame.display.set_caption("Dijkstra's Algorithm Visualization (Coal Mine)")
+pygame.init()
 
 # Colors
 WHITE = (255, 255, 255)
@@ -19,6 +22,8 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 BLUE = (0, 120, 255)
+LIGHT_GREY = (200, 200, 200)
+DARK_GREY = (80, 80, 80)
 
 class Node:
     def __init__(self, row, col, width, total_rows):
@@ -48,6 +53,9 @@ class Node:
 
     def is_end(self):
         return self.color == TURQUOISE
+        
+    def is_path(self):
+        return self.color == YELLOW
 
     def reset(self):
         self.color = WHITE
@@ -112,6 +120,7 @@ def dijkstra(draw, grid, start, end):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+                sys.exit()
 
         current = open_set.get()[2]
         open_set_hash.remove(current)
@@ -157,7 +166,38 @@ def draw_grid(win, rows, width):
         for j in range(rows):
             pygame.draw.line(win, GREY, (j * gap, 0), (j * gap, width))
 
-def draw(win, grid, rows, width):
+class Button:
+    def __init__(self, x, y, width, height, text, color, hover_color, text_color=BLACK):
+        self.rect = pygame.Rect(x, y, width, height)
+        self.text = text
+        self.color = color
+        self.hover_color = hover_color
+        self.text_color = text_color
+        self.current_color = color
+        self.font = pygame.font.SysFont('arial', 16)
+
+    def draw(self, win):
+        # Draw button rectangle
+        pygame.draw.rect(win, self.current_color, self.rect)
+        pygame.draw.rect(win, DARK_GREY, self.rect, 2)  # Border
+        
+        # Draw text
+        text_surface = self.font.render(self.text, True, self.text_color)
+        text_rect = text_surface.get_rect(center=self.rect.center)
+        win.blit(text_surface, text_rect)
+    
+    def check_hover(self, pos):
+        if self.rect.collidepoint(pos):
+            self.current_color = self.hover_color
+        else:
+            self.current_color = self.color
+            
+    def is_clicked(self, pos, click):
+        if self.rect.collidepoint(pos) and click:
+            return True
+        return False
+
+def draw(win, grid, rows, width, buttons):
     win.fill(WHITE)
 
     for row in grid:
@@ -165,6 +205,11 @@ def draw(win, grid, rows, width):
             node.draw(win)
 
     draw_grid(win, rows, width)
+    
+    # Draw buttons
+    for button in buttons:
+        button.draw(win)
+        
     pygame.display.update()
 
 def get_clicked_pos(pos, rows, width):
@@ -173,6 +218,12 @@ def get_clicked_pos(pos, rows, width):
     row = y // gap
     col = x // gap
     return row, col
+
+def clear_path(grid):
+    for row in grid:
+        for node in row:
+            if node.is_path() or node.is_closed() or node.is_open():
+                node.reset()
 
 def main(win, width):
     ROWS = 30
@@ -183,34 +234,68 @@ def main(win, width):
 
     run = True
     started = False
+    
+    # Create buttons
+    button_width = (width - 40) // 3
+    
+    start_button = Button(10, width + 5, button_width, 30, "Start Algorithm", LIGHT_GREY, GREEN)
+    clear_button = Button(20 + button_width, width + 5, button_width, 30, "Clear Path", LIGHT_GREY, YELLOW)
+    reset_button = Button(30 + 2 * button_width, width + 5, button_width, 30, "Reset All", LIGHT_GREY, RED)
+    
+    buttons = [start_button, clear_button, reset_button]
 
     while run:
-        draw(win, grid, ROWS, width)
+        mouse_pos = pygame.mouse.get_pos()
+        
+        # Update button hover states
+        for button in buttons:
+            button.check_hover(mouse_pos)
+            
+        draw(win, grid, ROWS, width, buttons)
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+                pygame.quit()
+                sys.exit()
 
-            if started:
-                continue
+            # Handle button clicks
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Left click
+                # Check if buttons were clicked
+                if start_button.is_clicked(mouse_pos, True) and not started and start and end:
+                    for row in grid:
+                        for node in row:
+                            node.update_neighbors(grid)
+                    started = True
+                    dijkstra(lambda: draw(win, grid, ROWS, width, buttons), grid, start, end)
+                    started = False
+                
+                elif clear_button.is_clicked(mouse_pos, True) and not started:
+                    clear_path(grid)
+                
+                elif reset_button.is_clicked(mouse_pos, True) and not started:
+                    start = None
+                    end = None
+                    grid = make_grid(ROWS, width)
+                    
+                # Handle grid clicks
+                elif not started and mouse_pos[1] < width:  # Only if click is in the grid area
+                    row, col = get_clicked_pos(mouse_pos, ROWS, width)
+                    if row >= ROWS or col >= ROWS:
+                        continue
+                    node = grid[row][col]
+                    if not start and node != end:
+                        start = node
+                        start.make_start()
+                    elif not end and node != start:
+                        end = node
+                        end.make_end()
+                    elif node != end and node != start:
+                        node.make_barrier()
 
-            if pygame.mouse.get_pressed()[0]: # LEFT
-                pos = pygame.mouse.get_pos()
-                row, col = get_clicked_pos(pos, ROWS, width)
-                if row >= ROWS or col >= ROWS:
-                    continue
-                node = grid[row][col]
-                if not start and node != end:
-                    start = node
-                    start.make_start()
-                elif not end and node != start:
-                    end = node
-                    end.make_end()
-                elif node != end and node != start:
-                    node.make_barrier()
-
-            elif pygame.mouse.get_pressed()[2]: # RIGHT
-                pos = pygame.mouse.get_pos()
-                row, col = get_clicked_pos(pos, ROWS, width)
+            # Handle right-click
+            elif pygame.mouse.get_pressed()[2] and not started and mouse_pos[1] < width:  # RIGHT
+                row, col = get_clicked_pos(mouse_pos, ROWS, width)
                 if row >= ROWS or col >= ROWS:
                     continue
                 node = grid[row][col]
@@ -220,13 +305,14 @@ def main(win, width):
                 elif node == end:
                     end = None
 
-            if event.type == pygame.KEYDOWN:
+            # Keep keyboard shortcuts for convenience
+            if event.type == pygame.KEYDOWN and not started:
                 if event.key == pygame.K_SPACE and start and end:
                     for row in grid:
                         for node in row:
                             node.update_neighbors(grid)
                     started = True
-                    dijkstra(lambda: draw(win, grid, ROWS, width), grid, start, end)
+                    dijkstra(lambda: draw(win, grid, ROWS, width, buttons), grid, start, end)
                     started = False
 
                 if event.key == pygame.K_c:
