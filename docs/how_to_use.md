@@ -6,11 +6,22 @@ This guide explains how to use the Dijkstra's Algorithm Visualizer application e
 
 1. Make sure you have Python and Pygame installed on your system
 2. Run the application with the command: `python dijkstra_visualizer.py`
-3. The application will open a window with a grid and control buttons at the bottom
+3. A welcome screen will appear with an explanation of the application and instructions
+4. Click the "Start Application" button to proceed to the main visualization screen
+5. The main application will open with a grid and control buttons at the bottom
 
 ## Interface Elements
 
 The interface consists of:
+
+### Welcome Screen
+- An informative welcome screen with:
+  - Title and brief description
+  - Instructions on how to use the application
+  - Color legend explaining what each color represents
+  - "Start Application" button to proceed to the main visualization
+
+### Main Visualization Screen
 - A grid area representing the coal mine
 - Three control buttons at the bottom:
   - **Start Algorithm**: Begins the pathfinding visualization
@@ -38,27 +49,33 @@ The interface consists of:
 
 - **Spacebar**: Equivalent to clicking the "Start Algorithm" button
 - **C key**: Equivalent to clicking the "Reset All" button
+- **Escape key**: Return to the welcome screen
 
 ## Step-by-Step Usage Guide
 
-1. **Setup Phase**:
+1. **Welcome Screen**:
+   - Read the instructions and color legend to understand the application
+   - Click the "Start Application" button to proceed to the main visualization
+
+2. **Setup Phase**:
    - Left-click anywhere in the grid to place the start point (orange)
    - Left-click elsewhere to place the end point (turquoise)
-   3. Add barriers (black) by left-clicking or dragging your mouse across any remaining cells
+   - Add barriers (black) by left-clicking or dragging your mouse across any remaining cells
    - Right-click to remove any placed element if you want to make changes
 
-2. **Visualization Phase**:
+3. **Visualization Phase**:
    - Click the "Start Algorithm" button or press the Spacebar
    - Watch as the algorithm explores the grid:
      - Green cells represent nodes in the frontier (to be explored)
      - Red cells represent nodes that have been visited
      - When the end is found, the optimal path appears in yellow
 
-3. **Review and Modify**:
+4. **Review and Modify**:
    - After visualization completes, you can:
      - Click "Clear Path" to remove the visualization but keep your barrier setup
      - Click "Reset All" to start completely fresh
      - Make modifications to existing barriers (if you didn't clear the path)
+     - Press Escape to return to the welcome screen
 
 ## Tips for Effective Use
 

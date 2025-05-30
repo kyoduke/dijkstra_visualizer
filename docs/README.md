@@ -12,14 +12,16 @@ This documentation provides an overview of the Dijkstra's Algorithm Visualizer a
 ## Quick Start
 
 1. Run the application by executing `python dijkstra_visualizer.py`
-2. Use left-click to place:
+2. Read the welcome screen instructions and click "Start Application" to begin
+3. Use left-click to place:
    - First click: Start point (orange)
    - Second click: End point (turquoise)
    - Subsequent clicks or dragging: Barriers/walls (black)
-3. Use right-click to remove any placed node
-4. Click the "Start Algorithm" button or press the Spacebar to start the visualization
-5. Click "Clear Path" to clear the path but keep barriers and start/end points
-6. Click "Reset All" or press 'C' to completely reset the grid
+4. Use right-click to remove any placed node
+5. Click the "Start Algorithm" button or press the Spacebar to start the visualization
+6. Click "Clear Path" to clear the path but keep barriers and start/end points
+7. Click "Reset All" or press 'C' to completely reset the grid
+8. Press 'Escape' to return to the welcome screen
 
 ## Color Legend
 
