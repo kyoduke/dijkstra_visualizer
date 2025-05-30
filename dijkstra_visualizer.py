@@ -1,14 +1,14 @@
-# Dijkstra's Algorithm Visualizer for a Coal Mine (2D Grid) using pygame
+# Visualizador do Algoritmo de Dijkstra para uma Mina de Carvão (Grid 2D) usando pygame
 
 import pygame
 import math
 from queue import PriorityQueue
 import sys
 
-WIDTH = 600
+WIDTH = 800
 BUTTON_HEIGHT = 40
 WIN = pygame.display.set_mode((WIDTH, WIDTH + BUTTON_HEIGHT))
-pygame.display.set_caption("Dijkstra's Algorithm Visualization (Coal Mine)")
+pygame.display.set_caption("Visualização do Algoritmo de Dijkstra (Mina de Carvão)")
 pygame.init()
 
 # Colors
@@ -54,7 +54,7 @@ class Node:
 
     def is_end(self):
         return self.color == TURQUOISE
-        
+
     def is_path(self):
         return self.color == YELLOW
 
@@ -181,18 +181,18 @@ class Button:
         # Draw button rectangle
         pygame.draw.rect(win, self.current_color, self.rect)
         pygame.draw.rect(win, DARK_GREY, self.rect, 2)  # Border
-        
+
         # Draw text
         text_surface = self.font.render(self.text, True, self.text_color)
         text_rect = text_surface.get_rect(center=self.rect.center)
         win.blit(text_surface, text_rect)
-    
+
     def check_hover(self, pos):
         if self.rect.collidepoint(pos):
             self.current_color = self.hover_color
         else:
             self.current_color = self.color
-            
+
     def is_clicked(self, pos, click):
         if self.rect.collidepoint(pos) and click:
             return True
@@ -206,11 +206,11 @@ def draw(win, grid, rows, width, buttons):
             node.draw(win)
 
     draw_grid(win, rows, width)
-    
+
     # Draw buttons
     for button in buttons:
         button.draw(win)
-        
+
     pygame.display.update()
 
 def get_clicked_pos(pos, rows, width):
@@ -228,70 +228,93 @@ def clear_path(grid):
 
 def draw_welcome_screen(win):
     win.fill(WHITE)
-    
+
     # Title
     font_title = pygame.font.SysFont('arial', 36, bold=True)
-    title_text = font_title.render("Dijkstra's Algorithm Visualizer", True, BLACK)
-    win.blit(title_text, (WIDTH//2 - title_text.get_width()//2, 80))
-    
+    title_text = font_title.render("Visualizador do Algoritmo de Dijkstra", True, BLACK)
+    win.blit(title_text, (WIDTH//2 - title_text.get_width()//2, 60))
+
     # Subtitle
     font_subtitle = pygame.font.SysFont('arial', 24)
-    subtitle_text = font_subtitle.render("Coal Mine Pathfinding Simulation", True, DARK_GREY)
-    win.blit(subtitle_text, (WIDTH//2 - subtitle_text.get_width()//2, 130))
-    
+    subtitle_text = font_subtitle.render("Simulação de Busca de Caminho em Mina de Carvão", True, DARK_GREY)
+    win.blit(subtitle_text, (WIDTH//2 - subtitle_text.get_width()//2, 105))
+
     # Instructions
     font_instructions = pygame.font.SysFont('arial', 18)
     instructions = [
-        "This visualizer demonstrates Dijkstra's algorithm for pathfinding.",
-        "Instructions:",
-        "• First click: Place start point (orange)",
-        "• Second click: Place end point (turquoise)",
-        "• Drag mouse: Create barriers (black)",
-        "• Right-click: Erase nodes",
+        "Este visualizador demonstra o algoritmo de Dijkstra para busca de caminhos.",
+        "Instruções:",
+        "• Primeiro clique: Coloca o ponto de início (laranja)",
+        "• Segundo clique: Coloca o ponto de destino (turquesa)",
+        "• Arrastar mouse: Cria barreiras (preto)",
+        "• Clique direito: Apaga elementos",
         "",
-        "Once you've set start and end points, click 'Start Algorithm'",
-        "to visualize how Dijkstra's algorithm finds the shortest path."
+        "Após definir os pontos de início e fim, clique em 'Iniciar Algoritmo'",
+        "para visualizar como o algoritmo de Dijkstra encontra o menor caminho."
     ]
-    
-    y_pos = 190
+
+    y_pos = 160
     for line in instructions:
         text = font_instructions.render(line, True, BLACK)
         win.blit(text, (WIDTH//2 - text.get_width()//2, y_pos))
-        y_pos += 30
-    
+        y_pos += 28
+
     # Color Legend
-    y_pos += 10
-    legend_title = font_instructions.render("Color Legend:", True, BLACK)
+    y_pos += 5
+    legend_title = font_instructions.render("Legenda de Cores:", True, BLACK)
     win.blit(legend_title, (WIDTH//2 - legend_title.get_width()//2, y_pos))
     y_pos += 30
-    
+
+    # Reorganized legend to avoid text overlap
     legend_items = [
-        (ORANGE, "Start Node"),
-        (TURQUOISE, "End Node"),
-        (BLACK, "Barrier"),
-        (GREEN, "Open Set"),
-        (RED, "Closed Set"),
-        (YELLOW, "Path")
+        (ORANGE, "Ponto de Início"),
+        (TURQUOISE, "Ponto de Destino"),
+        (BLACK, "Barreira"),
+        (GREEN, "Fronteira"),
+        (RED, "Visitado"),
+        (YELLOW, "Caminho")
     ]
-    
-    for i, (color, label) in enumerate(legend_items):
-        # Draw color square
-        pygame.draw.rect(win, color, (WIDTH//2 - 100, y_pos, 20, 20))
-        # Draw label
-        label_text = font_instructions.render(label, True, BLACK)
-        win.blit(label_text, (WIDTH//2 - 70, y_pos))
-        
-        if i % 2 == 0 and i < len(legend_items) - 1:
-            # Move to the right side for the next item
-            y_pos += 0  
-        else:
-            # Move down for the next pair
-            y_pos += 30
-            
+
+    left_x = WIDTH//2 - 180
+    right_x = WIDTH//2 + 20
+
+    # First row
+    pygame.draw.rect(win, legend_items[0][0], (left_x, y_pos, 20, 20))
+    label_text = font_instructions.render(legend_items[0][1], True, BLACK)
+    win.blit(label_text, (left_x + 30, y_pos))
+
+    pygame.draw.rect(win, legend_items[1][0], (right_x, y_pos, 20, 20))
+    label_text = font_instructions.render(legend_items[1][1], True, BLACK)
+    win.blit(label_text, (right_x + 30, y_pos))
+
+    y_pos += 30
+
+    # Second row
+    pygame.draw.rect(win, legend_items[2][0], (left_x, y_pos, 20, 20))
+    label_text = font_instructions.render(legend_items[2][1], True, BLACK)
+    win.blit(label_text, (left_x + 30, y_pos))
+
+    pygame.draw.rect(win, legend_items[3][0], (right_x, y_pos, 20, 20))
+    label_text = font_instructions.render(legend_items[3][1], True, BLACK)
+    win.blit(label_text, (right_x + 30, y_pos))
+
+    y_pos += 30
+
+    # Third row
+    pygame.draw.rect(win, legend_items[4][0], (left_x, y_pos, 20, 20))
+    label_text = font_instructions.render(legend_items[4][1], True, BLACK)
+    win.blit(label_text, (left_x + 30, y_pos))
+
+    pygame.draw.rect(win, legend_items[5][0], (right_x, y_pos, 20, 20))
+    label_text = font_instructions.render(legend_items[5][1], True, BLACK)
+    win.blit(label_text, (right_x + 30, y_pos))
+
+    y_pos += 50
+
     # Create start button
-    start_app_button = Button(WIDTH//2 - 100, y_pos + 20, 200, 50, "Start Application", LIGHT_BLUE, GREEN, BLACK)
+    start_app_button = Button(WIDTH//2 - 100, y_pos, 200, 50, "Iniciar Aplicação", LIGHT_BLUE, GREEN, BLACK)
     start_app_button.draw(win)
-    
+
     pygame.display.update()
     return start_app_button
 
@@ -305,22 +328,22 @@ def main(win, width):
     run = True
     started = False
     show_welcome = True
-    
+
     # Create buttons for the main application
     button_width = (width - 40) // 3
-    
-    start_button = Button(10, width + 5, button_width, 30, "Start Algorithm", LIGHT_GREY, GREEN)
-    clear_button = Button(20 + button_width, width + 5, button_width, 30, "Clear Path", LIGHT_GREY, YELLOW)
-    reset_button = Button(30 + 2 * button_width, width + 5, button_width, 30, "Reset All", LIGHT_GREY, RED)
-    
+
+    start_button = Button(10, width + 5, button_width, 30, "Iniciar Algoritmo", LIGHT_GREY, GREEN)
+    clear_button = Button(20 + button_width, width + 5, button_width, 30, "Limpar Caminho", LIGHT_GREY, YELLOW)
+    reset_button = Button(30 + 2 * button_width, width + 5, button_width, 30, "Reiniciar Tudo", LIGHT_GREY, RED)
+
     buttons = [start_button, clear_button, reset_button]
-    
+
     # Welcome screen button
     start_app_button = None
 
     while run:
         mouse_pos = pygame.mouse.get_pos()
-        
+
         # Show welcome screen or main application
         if show_welcome:
             if start_app_button is None:
@@ -329,13 +352,13 @@ def main(win, width):
                 start_app_button.check_hover(mouse_pos)
                 start_app_button.draw(win)
                 pygame.display.update()
-                
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
                     pygame.quit()
                     sys.exit()
-                
+
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if start_app_button.is_clicked(mouse_pos, True):
                         show_welcome = False
@@ -346,9 +369,9 @@ def main(win, width):
             # Update button hover states
             for button in buttons:
                 button.check_hover(mouse_pos)
-                
+
             draw(win, grid, ROWS, width, buttons)
-            
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
@@ -358,7 +381,7 @@ def main(win, width):
                 # Track mouse button state
                 left_mouse_pressed = pygame.mouse.get_pressed()[0]  # LEFT
                 right_mouse_pressed = pygame.mouse.get_pressed()[2]  # RIGHT
-                
+
                 # Handle button clicks and drawing on grid
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Left click
                     # Check if buttons were clicked
@@ -369,15 +392,15 @@ def main(win, width):
                         started = True
                         dijkstra(lambda: draw(win, grid, ROWS, width, buttons), grid, start, end)
                         started = False
-                    
+
                     elif clear_button.is_clicked(mouse_pos, True) and not started:
                         clear_path(grid)
-                    
+
                     elif reset_button.is_clicked(mouse_pos, True) and not started:
                         start = None
                         end = None
                         grid = make_grid(ROWS, width)
-            
+
                 # Handle grid interactions (both click and drag)
                 if left_mouse_pressed and not started and mouse_pos[1] < width:  # Only if in the grid area
                     row, col = get_clicked_pos(mouse_pos, ROWS, width)
@@ -417,7 +440,7 @@ def main(win, width):
                         start = None
                         end = None
                         grid = make_grid(ROWS, width)
-                        
+
                     # Add key to return to welcome screen
                     if event.key == pygame.K_ESCAPE:
                         show_welcome = True
