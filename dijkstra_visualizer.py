@@ -5,7 +5,7 @@ import math
 from queue import PriorityQueue
 import sys
 
-WIDTH = 800
+WIDTH = 600
 BUTTON_HEIGHT = 40
 WIN = pygame.display.set_mode((WIDTH, WIDTH + BUTTON_HEIGHT))
 pygame.display.set_caption("Visualização do Algoritmo de Dijkstra (Mina de Carvão)")
@@ -230,17 +230,17 @@ def draw_welcome_screen(win):
     win.fill(WHITE)
 
     # Title
-    font_title = pygame.font.SysFont('arial', 36, bold=True)
+    font_title = pygame.font.SysFont('arial', 30, bold=True)
     title_text = font_title.render("Visualizador do Algoritmo de Dijkstra", True, BLACK)
-    win.blit(title_text, (WIDTH//2 - title_text.get_width()//2, 60))
-
+    win.blit(title_text, (WIDTH//2 - title_text.get_width()//2, 50))
+    
     # Subtitle
-    font_subtitle = pygame.font.SysFont('arial', 24)
+    font_subtitle = pygame.font.SysFont('arial', 22)
     subtitle_text = font_subtitle.render("Simulação de Busca de Caminho em Mina de Carvão", True, DARK_GREY)
-    win.blit(subtitle_text, (WIDTH//2 - subtitle_text.get_width()//2, 105))
-
+    win.blit(subtitle_text, (WIDTH//2 - subtitle_text.get_width()//2, 90))
+    
     # Instructions
-    font_instructions = pygame.font.SysFont('arial', 18)
+    font_instructions = pygame.font.SysFont('arial', 15)
     instructions = [
         "Este visualizador demonstra o algoritmo de Dijkstra para busca de caminhos.",
         "Instruções:",
@@ -253,17 +253,17 @@ def draw_welcome_screen(win):
         "para visualizar como o algoritmo de Dijkstra encontra o menor caminho."
     ]
 
-    y_pos = 160
+    y_pos = 140
     for line in instructions:
         text = font_instructions.render(line, True, BLACK)
         win.blit(text, (WIDTH//2 - text.get_width()//2, y_pos))
-        y_pos += 28
+        y_pos += 25
 
     # Color Legend
     y_pos += 5
     legend_title = font_instructions.render("Legenda de Cores:", True, BLACK)
     win.blit(legend_title, (WIDTH//2 - legend_title.get_width()//2, y_pos))
-    y_pos += 30
+    y_pos += 25
 
     # Reorganized legend to avoid text overlap
     legend_items = [
@@ -287,7 +287,7 @@ def draw_welcome_screen(win):
     label_text = font_instructions.render(legend_items[1][1], True, BLACK)
     win.blit(label_text, (right_x + 30, y_pos))
 
-    y_pos += 30
+    y_pos += 25
 
     # Second row
     pygame.draw.rect(win, legend_items[2][0], (left_x, y_pos, 20, 20))
@@ -298,7 +298,7 @@ def draw_welcome_screen(win):
     label_text = font_instructions.render(legend_items[3][1], True, BLACK)
     win.blit(label_text, (right_x + 30, y_pos))
 
-    y_pos += 30
+    y_pos += 25
 
     # Third row
     pygame.draw.rect(win, legend_items[4][0], (left_x, y_pos, 20, 20))
@@ -309,7 +309,7 @@ def draw_welcome_screen(win):
     label_text = font_instructions.render(legend_items[5][1], True, BLACK)
     win.blit(label_text, (right_x + 30, y_pos))
 
-    y_pos += 50
+    y_pos += 40
 
     # Create start button
     start_app_button = Button(WIDTH//2 - 100, y_pos, 200, 50, "Iniciar Aplicação", LIGHT_BLUE, GREEN, BLACK)
