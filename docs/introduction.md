@@ -1,44 +1,44 @@
-# Introduction to Dijkstra's Algorithm Visualizer
+# Introdução ao Visualizador do Algoritmo de Dijkstra
 
-## Overview
+## Visão Geral
 
-This application is a visual implementation of Dijkstra's algorithm designed to simulate pathfinding in a coal mine environment. It provides an interactive platform to understand how Dijkstra's algorithm works to find the shortest path between two points in a grid, with obstacles representing mine barriers.
+Esta aplicação é uma implementação visual do algoritmo de Dijkstra projetada para simular a busca de caminhos em um ambiente de mina de carvão. Ela fornece uma plataforma interativa para entender como o algoritmo de Dijkstra funciona para encontrar o caminho mais curto entre dois pontos em uma grade, com obstáculos representando barreiras da mina.
 
-## Purpose
+## Propósito
 
-The primary purpose of this visualization tool is educational. It helps users:
+O principal propósito desta ferramenta de visualização é educacional. Ela ajuda os usuários a:
 
-1. Understand the mechanics of Dijkstra's algorithm
-2. Visualize how the algorithm explores a space
-3. See how pathfinding works around barriers
-4. Learn about algorithmic efficiency in graph traversal
+1. Entender a mecânica do algoritmo de Dijkstra
+2. Visualizar como o algoritmo explora um espaço
+3. Ver como a busca de caminhos funciona ao redor de barreiras
+4. Aprender sobre eficiência algorítmica na travessia de grafos
 
-## Background
+## Contexto
 
-Dijkstra's algorithm, published by computer scientist Edsger W. Dijkstra in 1956, is a graph search algorithm that solves the single-source shortest path problem. The algorithm works by:
+O algoritmo de Dijkstra, publicado pelo cientista da computação Edsger W. Dijkstra em 1956, é um algoritmo de busca em grafos que resolve o problema do caminho mais curto de fonte única. O algoritmo funciona através de:
 
-1. Assigning initial distance values to all nodes
-2. Setting the distance for the initial node to zero and all other nodes to infinity
-3. Visiting the unvisited node with the smallest known distance
-4. Examining each unvisited neighbor of the current node
-5. Calculating their tentative distances through the current node
-6. Comparing the newly calculated distance to the current assigned value
-7. Assigning the smaller distance and updating the path
+1. Atribuição de valores iniciais de distância a todos os nós
+2. Definição da distância do nó inicial como zero e todos os outros nós como infinito
+3. Visitação do nó não visitado com a menor distância conhecida
+4. Exame de cada vizinho não visitado do nó atual
+5. Cálculo de suas distâncias provisórias através do nó atual
+6. Comparação da distância recém-calculada com o valor atual atribuído
+7. Atribuição da distância menor e atualização do caminho
 
-In the context of our coal mine visualization, each cell in the grid represents a location in the mine, and barriers represent impassable areas.
+No contexto da nossa visualização de mina de carvão, cada célula na grade representa uma localização na mina, e as barreiras representam áreas intransponíveis.
 
-## Technologies Used
+## Tecnologias Utilizadas
 
-The visualizer is built with:
+O visualizador é construído com:
 
-- **Python**: The core programming language
-- **Pygame**: A set of Python modules designed for writing video games, providing functionality for graphics and user input
+- **Python**: A linguagem de programação principal
+- **Pygame**: Um conjunto de módulos Python projetados para escrever jogos, fornecendo funcionalidades para gráficos e entrada do usuário
 
-## Visual Representation
+## Representação Visual
 
-In our visualization:
-- The algorithm's exploration is shown in real-time
-- The final path is highlighted once found
-- Different colors represent different states of nodes during exploration
+Em nossa visualização:
+- A exploração do algoritmo é mostrada em tempo real
+- O caminho final é destacado uma vez encontrado
+- Diferentes cores representam diferentes estados dos nós durante a exploração
 
-This approach provides an intuitive understanding of how Dijkstra's algorithm works, making abstract concepts concrete and accessible.
+Esta abordagem proporciona um entendimento intuitivo de como o algoritmo de Dijkstra funciona, tornando conceitos abstratos concretos e acessíveis.

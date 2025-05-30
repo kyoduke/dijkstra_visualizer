@@ -1,101 +1,101 @@
-# Dijkstra's Algorithm Explanation
+# Explicação do Algoritmo de Dijkstra
 
-## Overview
+## Visão Geral
 
-Dijkstra's algorithm is a widely used graph search algorithm that finds the shortest path between nodes in a graph. It was conceived by computer scientist Edsger W. Dijkstra in 1956 and published three years later.
+O algoritmo de Dijkstra é um algoritmo de busca em grafos amplamente utilizado que encontra o caminho mais curto entre nós em um grafo. Foi concebido pelo cientista da computação Edsger W. Dijkstra em 1956 e publicado três anos depois.
 
-## Core Concept
+## Conceito Principal
 
-The algorithm works on the principle of relaxation, where an approximation to the correct distance is gradually replaced by more accurate values until the shortest path is reached. 
+O algoritmo funciona com base no princípio de relaxamento, onde uma aproximação da distância correta é gradualmente substituída por valores mais precisos até que o caminho mais curto seja alcançado.
 
-## How It Works
+## Como Funciona
 
-At a high level, Dijkstra's algorithm works as follows:
+Em um nível alto, o algoritmo de Dijkstra funciona da seguinte forma:
 
-1. Initialize all nodes with an infinite distance value
-2. Set the distance of the starting node to 0
-3. Mark all nodes as unvisited
-4. Select the unvisited node with the smallest distance value
-5. For the current node, consider all unvisited neighbors and calculate their tentative distance
-6. Compare the newly calculated tentative distance to the assigned value and assign the smaller one
-7. Mark the current node as visited
-8. Repeat steps 4-7 until the destination node is marked as visited or the smallest tentative distance among the unvisited nodes is infinity (no path exists)
+1. Inicializar todos os nós com um valor de distância infinito
+2. Definir a distância do nó inicial como 0
+3. Marcar todos os nós como não visitados
+4. Selecionar o nó não visitado com o menor valor de distância
+5. Para o nó atual, considerar todos os vizinhos não visitados e calcular suas distâncias provisórias
+6. Comparar a distância provisória recém-calculada com o valor atribuído e atribuir o menor
+7. Marcar o nó atual como visitado
+8. Repetir os passos 4-7 até que o nó de destino seja marcado como visitado ou a menor distância provisória entre os nós não visitados seja infinita (não existe caminho)
 
-## Pseudocode
+## Pseudocódigo
 
 ```
-function Dijkstra(Graph, Source):
-    create vertex set Q
+function Dijkstra(Grafo, Origem):
+    criar conjunto de vértices Q
     
-    for each vertex v in Graph:
-        dist[v] ← INFINITY
-        prev[v] ← UNDEFINED
-        add v to Q
+    para cada vértice v em Grafo:
+        dist[v] ← INFINITO
+        prev[v] ← INDEFINIDO
+        adicionar v a Q
     
-    dist[Source] ← 0
+    dist[Origem] ← 0
     
-    while Q is not empty:
-        u ← vertex in Q with min dist[u]
-        remove u from Q
+    enquanto Q não estiver vazio:
+        u ← vértice em Q com menor dist[u]
+        remover u de Q
         
-        for each neighbor v of u:
-            alt ← dist[u] + length(u, v)
-            if alt < dist[v]:
+        para cada vizinho v de u:
+            alt ← dist[u] + comprimento(u, v)
+            se alt < dist[v]:
                 dist[v] ← alt
                 prev[v] ← u
     
-    return dist[], prev[]
+    retornar dist[], prev[]
 ```
 
-## Implementation in Our Visualizer
+## Implementação em Nosso Visualizador
 
-In our visualization implementation:
+Em nossa implementação de visualização:
 
-1. **Grid Representation**: The 2D grid is treated as a graph where each cell is a node
-2. **Neighbors**: Each cell connects to up to 4 adjacent cells (up, down, left, right)
-3. **Priority Queue**: We use a priority queue to efficiently select the next node to visit
-4. **Visualization**: 
-   - Green cells show nodes in the queue (frontier)
-   - Red cells show visited nodes
-   - Yellow shows the final path
+1. **Representação da Grade**: A grade 2D é tratada como um grafo onde cada célula é um nó
+2. **Vizinhos**: Cada célula se conecta a até 4 células adjacentes (cima, baixo, esquerda, direita)
+3. **Fila de Prioridade**: Usamos uma fila de prioridade para selecionar eficientemente o próximo nó a visitar
+4. **Visualização**: 
+   - Células verdes mostram nós na fila (fronteira)
+   - Células vermelhas mostram nós visitados
+   - Amarelo mostra o caminho final
 
-## Complexity Analysis
+## Análise de Complexidade
 
-- **Time Complexity**: O(E + V log V) where:
-  - E is the number of edges (connections between cells)
-  - V is the number of vertices (cells)
-  - The log V factor comes from operations on the priority queue
+- **Complexidade de Tempo**: O(E + V log V) onde:
+  - E é o número de arestas (conexões entre células)
+  - V é o número de vértices (células)
+  - O fator log V vem das operações na fila de prioridade
 
-- **Space Complexity**: O(V) for storing:
-  - The priority queue
-  - The distance dictionary
-  - The came_from dictionary for path reconstruction
+- **Complexidade de Espaço**: O(V) para armazenar:
+  - A fila de prioridade
+  - O dicionário de distâncias
+  - O dicionário "veio_de" para reconstrução do caminho
 
-## Strengths and Limitations
+## Pontos Fortes e Limitações
 
-**Strengths**:
-- Guarantees the shortest path
-- Works well on graphs with non-negative edge weights
-- Simple to implement
+**Pontos Fortes**:
+- Garante o caminho mais curto
+- Funciona bem em grafos com pesos de arestas não-negativos
+- Simples de implementar
 
-**Limitations**:
-- Inefficient for large sparse graphs
-- Cannot handle negative weights
-- Explores in all directions equally (unlike A* which uses heuristics)
+**Limitações**:
+- Ineficiente para grafos esparsos grandes
+- Não pode lidar com pesos negativos
+- Explora em todas as direções igualmente (diferente do A* que usa heurísticas)
 
-## Visualization Insights
+## Percepções da Visualização
 
-The visualization reveals several interesting aspects of Dijkstra's algorithm:
+A visualização revela vários aspectos interessantes do algoritmo de Dijkstra:
 
-1. **Wavefront Expansion**: The algorithm expands outward from the start like a wavefront
-2. **Equal Distance Exploration**: Nodes at the same distance from the start are explored nearly simultaneously
-3. **Barrier Handling**: The algorithm naturally flows around barriers to find the shortest path
-4. **Path Reconstruction**: Once the end is found, we can trace backward to construct the shortest path
+1. **Expansão de Frente de Onda**: O algoritmo expande para fora a partir do início como uma frente de onda
+2. **Exploração de Distância Igual**: Nós à mesma distância do início são explorados quase simultaneamente
+3. **Tratamento de Barreiras**: O algoritmo flui naturalmente ao redor das barreiras para encontrar o caminho mais curto
+4. **Reconstrução do Caminho**: Uma vez que o fim é encontrado, podemos traçar para trás para construir o caminho mais curto
 
-## Comparison with Other Pathfinding Algorithms
+## Comparação com Outros Algoritmos de Busca de Caminhos
 
-- **Breadth-First Search (BFS)**: Similar to Dijkstra when all edges have equal weight, but does not use a priority queue
-- **A* Algorithm**: An extension of Dijkstra that uses heuristics to guide the search toward the goal
-- **Depth-First Search (DFS)**: Explores as far as possible along each branch before backtracking; not guaranteed to find the shortest path
+- **Busca em Largura (BFS)**: Semelhante ao Dijkstra quando todas as arestas têm peso igual, mas não usa uma fila de prioridade
+- **Algoritmo A***: Uma extensão do Dijkstra que usa heurísticas para guiar a busca em direção ao objetivo
+- **Busca em Profundidade (DFS)**: Explora o mais longe possível ao longo de cada ramo antes de retroceder; não garante encontrar o caminho mais curto
 
-In our implementation, Dijkstra's algorithm is particularly suitable because it guarantees the shortest path and provides an intuitive visualization of how pathfinding works.
+Em nossa implementação, o algoritmo de Dijkstra é particularmente adequado porque garante o caminho mais curto e fornece uma visualização intuitiva de como a busca de caminhos funciona.

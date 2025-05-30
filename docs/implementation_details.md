@@ -1,29 +1,29 @@
-# Implementation Details
+# Detalhes de Implementação
 
-This document outlines the technical implementation of the Dijkstra's Algorithm Visualizer.
+Este documento descreve a implementação técnica do Visualizador do Algoritmo de Dijkstra.
 
-## Code Structure
+## Estrutura do Código
 
-The application is organized as follows:
+A aplicação está organizada da seguinte forma:
 
-- **Main Components**:
-  - Grid and Node representation
-  - Dijkstra's algorithm implementation
-  - Visualization and UI components
-  - Event handling
+- **Componentes Principais**:
+  - Representação da Grade e do Nó
+  - Implementação do algoritmo de Dijkstra
+  - Componentes de visualização e interface do usuário
+  - Tratamento de eventos
 
-## Key Classes
+## Classes Principais
 
-### Node Class
+### Classe Node
 
-The `Node` class represents each cell in the grid and contains:
+A classe `Node` representa cada célula na grade e contém:
 
-- Position information (row, col)
-- Pixel coordinates (x, y)
-- Color state (representing different states during visualization)
-- Neighbor nodes
-- Methods for changing states (make_start, make_end, make_barrier, etc.)
-- Methods for checking states (is_start, is_end, is_barrier, etc.)
+- Informações de posição (linha, coluna)
+- Coordenadas em pixels (x, y)
+- Estado da cor (representando diferentes estados durante a visualização)
+- Nós vizinhos
+- Métodos para mudar estados (make_start, make_end, make_barrier, etc.)
+- Métodos para verificar estados (is_start, is_end, is_barrier, etc.)
 
 ```python
 class Node:
@@ -38,14 +38,14 @@ class Node:
         self.total_rows = total_rows
 ```
 
-### Button Class
+### Classe Button
 
-The `Button` class provides UI controls:
+A classe `Button` fornece controles de interface do usuário:
 
-- Position and size
-- Text content
-- Color states (normal and hover)
-- Methods for drawing and detecting interactions
+- Posição e tamanho
+- Conteúdo de texto
+- Estados de cor (normal e hover)
+- Métodos para desenhar e detectar interações
 
 ```python
 class Button:
@@ -59,62 +59,62 @@ class Button:
         self.font = pygame.font.SysFont('arial', 16)
 ```
 
-## Algorithm Implementation
+## Implementação do Algoritmo
 
-The Dijkstra's algorithm is implemented in the `dijkstra()` function with these key components:
+O algoritmo de Dijkstra é implementado na função `dijkstra()` com estes componentes principais:
 
-1. **Priority Queue**: Maintains nodes to visit sorted by current distance
-2. **Distance Dictionary**: Tracks the current shortest distance to each node
-3. **Came From Dictionary**: Records the path for reconstruction
-4. **Visualization Updates**: Updates the display during algorithm execution
+1. **Fila de Prioridade**: Mantém os nós a visitar ordenados pela distância atual
+2. **Dicionário de Distâncias**: Acompanha a menor distância atual para cada nó
+3. **Dicionário "Veio De"**: Registra o caminho para reconstrução
+4. **Atualizações de Visualização**: Atualiza a exibição durante a execução do algoritmo
 
-The algorithm runs until:
-- The end node is found (success)
-- The queue is emptied without finding the end node (no path exists)
+O algoritmo é executado até que:
+- O nó final seja encontrado (sucesso)
+- A fila seja esvaziada sem encontrar o nó final (não existe caminho)
 
-## Visualization Mechanics
+## Mecânica de Visualização
 
-The visualization works through:
+A visualização funciona através de:
 
-1. **Color Coding**:
-   - White: Unvisited nodes
-   - Green: Nodes in the queue (frontier)
-   - Red: Visited nodes
-   - Yellow: Final path
-   - Black: Barriers
-   - Orange: Start node
-   - Turquoise: End node
+1. **Codificação por Cores**:
+   - Branco: Nós não visitados
+   - Verde: Nós na fila (fronteira)
+   - Vermelho: Nós visitados
+   - Amarelo: Caminho final
+   - Preto: Barreiras
+   - Laranja: Nó inicial
+   - Turquesa: Nó final
 
-2. **Real-time Updates**:
-   - The `draw()` function updates the display after each algorithm step
-   - Node colors change to reflect the current state of the algorithm
+2. **Atualizações em Tempo Real**:
+   - A função `draw()` atualiza a exibição após cada etapa do algoritmo
+   - As cores dos nós mudam para refletir o estado atual do algoritmo
 
-## User Interaction
+## Interação do Usuário
 
-User interactions are handled through:
+As interações do usuário são tratadas através de:
 
-1. **Event Loop**:
-   - Pygame's event system processes mouse and keyboard inputs
-   - Button clicks are detected through collision detection
-   - Grid cell interactions are managed through position calculations
+1. **Loop de Eventos**:
+   - O sistema de eventos do Pygame processa entradas de mouse e teclado
+   - Cliques em botões são detectados através de detecção de colisão
+   - Interações com células da grade são gerenciadas através de cálculos de posição
 
-2. **Button Actions**:
-   - Start Algorithm: Initializes node neighbors and runs Dijkstra's algorithm
-   - Clear Path: Resets nodes that are part of the path, visited, or in the frontier
-   - Reset All: Creates a new grid, discarding all current state
+2. **Ações dos Botões**:
+   - Iniciar Algoritmo: Inicializa os vizinhos dos nós e executa o algoritmo de Dijkstra
+   - Limpar Caminho: Reinicia nós que fazem parte do caminho, visitados ou na fronteira
+   - Reiniciar Tudo: Cria uma nova grade, descartando todo o estado atual
 
-## Technical Considerations
+## Considerações Técnicas
 
-- **Performance**: The grid is limited to 30x30 for reasonable performance
-- **Simplicity**: All edges have a weight of 1 for easier visualization
-- **Extensibility**: The code structure allows for potential extensions like:
-  - Different algorithms (A*, BFS, DFS)
-  - Variable grid sizes
-  - Weighted edges
+- **Desempenho**: A grade é limitada a 30x30 para um desempenho razoável
+- **Simplicidade**: Todas as arestas têm peso 1 para facilitar a visualização
+- **Extensibilidade**: A estrutura do código permite extensões potenciais como:
+  - Diferentes algoritmos (A*, BFS, DFS)
+  - Tamanhos de grade variáveis
+  - Arestas com pesos
 
-## Dependencies
+## Dependências
 
-The application requires:
+A aplicação requer:
 - Python 3.x
-- Pygame library
-- Standard Python libraries (queue, math, sys)
+- Biblioteca Pygame
+- Bibliotecas Python padrão (queue, math, sys)
