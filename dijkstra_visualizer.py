@@ -259,7 +259,11 @@ def main(win, width):
                 pygame.quit()
                 sys.exit()
 
-            # Handle button clicks
+            # Track mouse button state
+            left_mouse_pressed = pygame.mouse.get_pressed()[0]  # LEFT
+            right_mouse_pressed = pygame.mouse.get_pressed()[2]  # RIGHT
+            
+            # Handle button clicks and drawing on grid
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Left click
                 # Check if buttons were clicked
                 if start_button.is_clicked(mouse_pos, True) and not started and start and end:
@@ -277,12 +281,11 @@ def main(win, width):
                     start = None
                     end = None
                     grid = make_grid(ROWS, width)
-                    
-                # Handle grid clicks
-                elif not started and mouse_pos[1] < width:  # Only if click is in the grid area
-                    row, col = get_clicked_pos(mouse_pos, ROWS, width)
-                    if row >= ROWS or col >= ROWS:
-                        continue
+            
+            # Handle grid interactions (both click and drag)
+            if left_mouse_pressed and not started and mouse_pos[1] < width:  # Only if in the grid area
+                row, col = get_clicked_pos(mouse_pos, ROWS, width)
+                if 0 <= row < ROWS and 0 <= col < ROWS:
                     node = grid[row][col]
                     if not start and node != end:
                         start = node
@@ -293,17 +296,16 @@ def main(win, width):
                     elif node != end and node != start:
                         node.make_barrier()
 
-            # Handle right-click
-            elif pygame.mouse.get_pressed()[2] and not started and mouse_pos[1] < width:  # RIGHT
+            # Handle right-click (erase)
+            if right_mouse_pressed and not started and mouse_pos[1] < width:  # RIGHT
                 row, col = get_clicked_pos(mouse_pos, ROWS, width)
-                if row >= ROWS or col >= ROWS:
-                    continue
-                node = grid[row][col]
-                node.reset()
-                if node == start:
-                    start = None
-                elif node == end:
-                    end = None
+                if 0 <= row < ROWS and 0 <= col < ROWS:
+                    node = grid[row][col]
+                    node.reset()
+                    if node == start:
+                        start = None
+                    elif node == end:
+                        end = None
 
             # Keep keyboard shortcuts for convenience
             if event.type == pygame.KEYDOWN and not started:
