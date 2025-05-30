@@ -1,7 +1,6 @@
 # Visualizador do Algoritmo de Dijkstra para uma Mina de Carvão (Grid 2D) usando pygame
 
 import pygame
-import math
 from queue import PriorityQueue
 import sys
 
@@ -233,12 +232,12 @@ def draw_welcome_screen(win):
     font_title = pygame.font.SysFont('arial', 30, bold=True)
     title_text = font_title.render("Visualizador do Algoritmo de Dijkstra", True, BLACK)
     win.blit(title_text, (WIDTH//2 - title_text.get_width()//2, 50))
-    
+
     # Subtitle
     font_subtitle = pygame.font.SysFont('arial', 22)
     subtitle_text = font_subtitle.render("Simulação de Busca de Caminho em Mina de Carvão", True, DARK_GREY)
     win.blit(subtitle_text, (WIDTH//2 - subtitle_text.get_width()//2, 90))
-    
+
     # Instructions
     font_instructions = pygame.font.SysFont('arial', 15)
     instructions = [
