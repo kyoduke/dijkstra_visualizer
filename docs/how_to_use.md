@@ -1,96 +1,96 @@
-# How to Use the Dijkstra's Algorithm Visualizer
+# Como Usar o Visualizador do Algoritmo de Dijkstra
 
-This guide explains how to use the Dijkstra's Algorithm Visualizer application effectively.
+Este guia explica como usar efetivamente a aplicação do Visualizador do Algoritmo de Dijkstra.
 
-## Starting the Application
+## Iniciando a Aplicação
 
-1. Make sure you have Python and Pygame installed on your system
-2. Run the application with the command: `python dijkstra_visualizer.py`
-3. A welcome screen will appear with an explanation of the application and instructions
-4. Click the "Start Application" button to proceed to the main visualization screen
-5. The main application will open with a grid and control buttons at the bottom
+1. Certifique-se de ter Python e Pygame instalados em seu sistema
+2. Execute a aplicação com o comando: `python dijkstra_visualizer.py`
+3. Uma tela de boas-vindas aparecerá com uma explicação da aplicação e instruções
+4. Clique no botão "Iniciar Aplicação" para prosseguir para a tela principal de visualização
+5. A aplicação principal abrirá com uma grade e botões de controle na parte inferior
 
-## Interface Elements
+## Elementos da Interface
 
-The interface consists of:
+A interface consiste em:
 
-### Welcome Screen
-- An informative welcome screen with:
-  - Title and brief description
-  - Instructions on how to use the application
-  - Color legend explaining what each color represents
-  - "Start Application" button to proceed to the main visualization
+### Tela de Boas-vindas
+- Uma tela informativa de boas-vindas com:
+  - Título e breve descrição
+  - Instruções sobre como usar a aplicação
+  - Legenda de cores explicando o que cada cor representa
+  - Botão "Iniciar Aplicação" para prosseguir para a visualização principal
 
-### Main Visualization Screen
-- A grid area representing the coal mine
-- Three control buttons at the bottom:
-  - **Start Algorithm**: Begins the pathfinding visualization
-  - **Clear Path**: Removes the visualized path but keeps barriers and start/end points
-  - **Reset All**: Completely resets the grid to its initial state
+### Tela Principal de Visualização
+- Uma área de grade representando a mina de carvão
+- Três botões de controle na parte inferior:
+  - **Iniciar Algoritmo**: Inicia a visualização da busca de caminho
+  - **Limpar Caminho**: Remove o caminho visualizado, mas mantém barreiras e pontos de início/fim
+  - **Reiniciar Tudo**: Reinicia completamente a grade para seu estado inicial
 
-## Basic Controls
+## Controles Básicos
 
-### Mouse Controls
+### Controles do Mouse
 
-- **Left-click**:
-  - First click: Place the start point (orange)
-  - Second click: Place the end point (turquoise)
-  - Subsequent clicks or dragging: Place barriers/walls (black)
-- **Right-click**:
-  - Remove any placed node (start, end, or barrier)
+- **Clique esquerdo**:
+  - Primeiro clique: Coloca o ponto de início (laranja)
+  - Segundo clique: Coloca o ponto de destino (turquesa)
+  - Cliques subsequentes ou arrastar: Coloca barreiras/paredes (preto)
+- **Clique direito**:
+  - Remove qualquer nó colocado (início, fim ou barreira)
 
-### Button Controls
+### Controles de Botões
 
-- **Start Algorithm**: Click to begin the pathfinding visualization (only works when both start and end points are placed)
-- **Clear Path**: Click to remove the visualized path but keep barriers and start/end points
-- **Reset All**: Click to completely reset the grid
+- **Iniciar Algoritmo**: Clique para iniciar a visualização da busca de caminho (funciona apenas quando os pontos de início e fim estão colocados)
+- **Limpar Caminho**: Clique para remover o caminho visualizado, mas manter barreiras e pontos de início/fim
+- **Reiniciar Tudo**: Clique para reiniciar completamente a grade
 
-### Keyboard Shortcuts
+### Atalhos de Teclado
 
-- **Spacebar**: Equivalent to clicking the "Start Algorithm" button
-- **C key**: Equivalent to clicking the "Reset All" button
-- **Escape key**: Return to the welcome screen
+- **Barra de Espaço**: Equivalente a clicar no botão "Iniciar Algoritmo"
+- **Tecla C**: Equivalente a clicar no botão "Reiniciar Tudo"
+- **Tecla Escape**: Retorna à tela de boas-vindas
 
-## Step-by-Step Usage Guide
+## Guia de Uso Passo a Passo
 
-1. **Welcome Screen**:
-   - Read the instructions and color legend to understand the application
-   - Click the "Start Application" button to proceed to the main visualization
+1. **Tela de Boas-vindas**:
+   - Leia as instruções e a legenda de cores para entender a aplicação
+   - Clique no botão "Iniciar Aplicação" para prosseguir para a visualização principal
 
-2. **Setup Phase**:
-   - Left-click anywhere in the grid to place the start point (orange)
-   - Left-click elsewhere to place the end point (turquoise)
-   - Add barriers (black) by left-clicking or dragging your mouse across any remaining cells
-   - Right-click to remove any placed element if you want to make changes
+2. **Fase de Configuração**:
+   - Clique com o botão esquerdo em qualquer lugar da grade para colocar o ponto de início (laranja)
+   - Clique com o botão esquerdo em outro lugar para colocar o ponto de destino (turquesa)
+   - Adicione barreiras (preto) clicando ou arrastando o mouse sobre as células restantes
+   - Clique com o botão direito para remover qualquer elemento colocado se quiser fazer alterações
 
-3. **Visualization Phase**:
-   - Click the "Start Algorithm" button or press the Spacebar
-   - Watch as the algorithm explores the grid:
-     - Green cells represent nodes in the frontier (to be explored)
-     - Red cells represent nodes that have been visited
-     - When the end is found, the optimal path appears in yellow
+3. **Fase de Visualização**:
+   - Clique no botão "Iniciar Algoritmo" ou pressione a Barra de Espaço
+   - Observe como o algoritmo explora a grade:
+     - Células verdes representam nós na fronteira (a serem explorados)
+     - Células vermelhas representam nós que foram visitados
+     - Quando o destino é encontrado, o caminho ótimo aparece em amarelo
 
-4. **Review and Modify**:
-   - After visualization completes, you can:
-     - Click "Clear Path" to remove the visualization but keep your barrier setup
-     - Click "Reset All" to start completely fresh
-     - Make modifications to existing barriers (if you didn't clear the path)
-     - Press Escape to return to the welcome screen
+4. **Revisar e Modificar**:
+   - Após a conclusão da visualização, você pode:
+     - Clicar em "Limpar Caminho" para remover a visualização, mas manter a configuração de barreiras
+     - Clicar em "Reiniciar Tudo" para começar completamente do zero
+     - Fazer modificações nas barreiras existentes (se você não limpou o caminho)
+     - Pressionar Escape para retornar à tela de boas-vindas
 
-## Tips for Effective Use
+## Dicas para Uso Efetivo
 
-- Create different barrier patterns by dragging the mouse to test the algorithm's behavior
-- Try placing the start and end points at different distances
-- Notice how the algorithm always finds the shortest path
-- Observe how the exploration spreads out equally in all directions
-- Create mazes with single-cell-width paths to see interesting pathfinding behaviors
+- Crie diferentes padrões de barreiras arrastando o mouse para testar o comportamento do algoritmo
+- Tente colocar os pontos de início e fim em distâncias diferentes
+- Observe como o algoritmo sempre encontra o caminho mais curto
+- Observe como a exploração se espalha igualmente em todas as direções
+- Crie labirintos com caminhos de largura de uma célula para ver comportamentos interessantes de busca de caminho
 
-## Limitations
+## Limitações
 
-- The grid size is fixed at 30x30 cells
-- Diagonal movement is not supported in this implementation
-- All steps have the same weight (cost of 1) in this implementation
+- O tamanho da grade é fixado em 30x30 células
+- Movimento diagonal não é suportado nesta implementação
+- Todos os passos têm o mesmo peso (custo de 1) nesta implementação
 
-## Next Steps
+## Próximos Passos
 
-After understanding the basic visualization, consider exploring the [Implementation Details](implementation_details.md) and [Algorithm Explanation](algorithm_explanation.md) documents to learn more about how Dijkstra's algorithm works.
+Após entender a visualização básica, considere explorar os documentos [Detalhes de Implementação](implementation_details.md) e [Explicação do Algoritmo](algorithm_explanation.md) para saber mais sobre como o algoritmo de Dijkstra funciona.
