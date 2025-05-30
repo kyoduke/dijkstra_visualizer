@@ -1,36 +1,36 @@
-# Dijkstra's Algorithm Visualizer
+# Visualizador do Algoritmo de Dijkstra
 
-This documentation provides an overview of the Dijkstra's Algorithm Visualizer application. This tool visualizes Dijkstra's pathfinding algorithm in the context of a coal mine, represented as a 2D grid.
+Esta documentação fornece uma visão geral da aplicação Visualizador do Algoritmo de Dijkstra. Esta ferramenta visualiza o algoritmo de busca de caminhos de Dijkstra no contexto de uma mina de carvão, representada como uma grade 2D.
 
-## Table of Contents
+## Índice
 
-1. [Introduction](introduction.md)
-2. [How to Use](how_to_use.md)
-3. [Implementation Details](implementation_details.md)
-4. [Algorithm Explanation](algorithm_explanation.md)
+1. [Introdução](introduction.md)
+2. [Como Usar](how_to_use.md)
+3. [Detalhes de Implementação](implementation_details.md)
+4. [Explicação do Algoritmo](algorithm_explanation.md)
 
-## Quick Start
+## Início Rápido
 
-1. Run the application by executing `python dijkstra_visualizer.py`
-2. Read the welcome screen instructions and click "Start Application" to begin
-3. Use left-click to place:
-   - First click: Start point (orange)
-   - Second click: End point (turquoise)
-   - Subsequent clicks or dragging: Barriers/walls (black)
-4. Use right-click to remove any placed node
-5. Click the "Start Algorithm" button or press the Spacebar to start the visualization
-6. Click "Clear Path" to clear the path but keep barriers and start/end points
-7. Click "Reset All" or press 'C' to completely reset the grid
-8. Press 'Escape' to return to the welcome screen
+1. Execute a aplicação com o comando `python dijkstra_visualizer.py`
+2. Leia as instruções na tela inicial e clique em "Iniciar Aplicação" para começar
+3. Use o botão esquerdo do mouse para colocar:
+   - Primeiro clique: Ponto de início (laranja)
+   - Segundo clique: Ponto de destino (turquesa)
+   - Cliques subsequentes ou arrastar: Barreiras/paredes (preto)
+4. Use o botão direito do mouse para remover qualquer nó colocado
+5. Clique no botão "Iniciar Algoritmo" ou pressione a Barra de Espaço para iniciar a visualização
+6. Clique em "Limpar Caminho" para limpar o caminho mantendo barreiras e pontos de início/fim
+7. Clique em "Reiniciar Tudo" ou pressione 'C' para reiniciar completamente a grade
+8. Pressione 'Escape' para retornar à tela inicial
 
-## Color Legend
+## Legenda de Cores
 
-- **Orange**: Start point
-- **Turquoise**: End point
-- **Black**: Barriers/Walls
-- **Red**: Visited nodes
-- **Green**: Nodes in the queue
-- **Yellow**: Final path
-- **White**: Unvisited nodes
+- **Laranja**: Ponto de início
+- **Turquesa**: Ponto de destino
+- **Preto**: Barreiras/Paredes
+- **Vermelho**: Nós visitados
+- **Verde**: Nós na fronteira
+- **Amarelo**: Caminho final
+- **Branco**: Nós não visitados
 
-For more detailed information, please see the documentation files linked in the Table of Contents.
+Para informações mais detalhadas, consulte os arquivos de documentação vinculados no Índice.
